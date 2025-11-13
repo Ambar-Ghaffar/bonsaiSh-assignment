@@ -1,0 +1,65 @@
+zinovi [0]$ pidof bonsaiSh
+75946
+zinovi [1]$ grow 1
+zinovi [2]$ pstree -p 75946
+bonsaiSh(75946)-+-bonsaiSh(75993)
+                |-bonsaiSh(75994)
+                `-pstree(76020)
+zinovi [3]$ delegate pstree -p 75946 >tmp.txt
+zinovi [4]$ cat tmp.txt
+bonsaiSh(75946)-+-bonsaiSh(75993)---pstree(76039)
+                `-bonsaiSh(75994)
+zinovi [5]$ delegate pstree -p 75946 >tmp.txt
+zinovi [8]$ cat tmp.txt
+bonsaiSh(75946)-+-bonsaiSh(75993)
+                `-bonsaiSh(75994)---pstree(76063)
+zinovi [9]$ grow 2
+zinovi [10]$ pstree -p 75946
+bonsaiSh(75946)-+-bonsaiSh(75993)-+-bonsaiSh(76186)
+                |                 `-bonsaiSh(76188)
+                |-bonsaiSh(75994)-+-bonsaiSh(76187)
+                |                 `-bonsaiSh(76189)
+                `-pstree(76215)
+zinovi [11]$ delegate noop
+zinovi [12]$ delegate noop
+zinovi [13]$ delegate noop
+zinovi [14]$ delegate pstree -p 75946 >tmp.txt
+zinovi [15]$ cat tmp.txt
+bonsaiSh(75946)-+-bonsaiSh(75993)-+-bonsaiSh(76186)
+                |                 `-bonsaiSh(76188)
+                `-bonsaiSh(75994)-+-bonsaiSh(76187)---pstree(76778)
+                                  `-bonsaiSh(76189)
+zinovi [16]$ delegate exit
+zinovi [17]$ pstree -p 75946
+bonsaiSh(75946)-+-bonsaiSh(75993)---bonsaiSh(76186)
+                |-bonsaiSh(75994)-+-bonsaiSh(76187)
+                |                 `-bonsaiSh(76189)
+                `-pstree(77346)
+zinovi [18]$ prune
+zinovi [19]$ pstree -p 75946
+bonsaiSh(75946)-+-bonsaiSh(75994)---bonsaiSh(76189)
+                `-pstree(77451)
+zinovi [20]$ delegate noop
+zinovi [21]$ delegate pstree -p 75946 >tmp.txt
+zinovi [22]$ cat tmp.txt
+bonsaiSh(75946)---bonsaiSh(75994)-+-bonsaiSh(76189)
+                                  `-pstree(77512)
+zinovi [23]$ delegate pstree -p 75946 >tmp.txt
+zinovi [24]$ cat tmp.txt
+bonsaiSh(75946)---bonsaiSh(75994)---bonsaiSh(76189)---pstree(77581)
+zinovi [25]$ uproot
+zinovi [26]$ delegate pstree -p 75946 >tmp.txt
+zinovi [27]$ cat tmp.txt
+bonsaiSh(75946)---pstree(77624)
+zinovi [28]$ exit
+zinovi [0]$ pidof bonsaiSh
+80728
+zinovi [1]$ grow 4
+zinovi [2]$ pstree -p 80728
+bonsaiSh(80728)-+-bonsaiSh(80757)-+-bonsaiSh(80759)-+-bonsaiSh(80763)
+                |                 |                 `-bonsaiSh(80764)
+                |                 `-bonsaiSh(80761)
+                |-bonsaiSh(80758)-+-bonsaiSh(80760)---bonsaiSh(80766)
+                |                 `-bonsaiSh(80762)---bonsaiSh(80765)
+                `-pstree(80798)
+zinovi [3]$ 
